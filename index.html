@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Replace student avatar images in the Achievements cards with a name cover
+    document.querySelectorAll('#achievements img').forEach(function (img) {
+        const card = img.closest('.rounded-xl');
+        if (!card) return;
+        // Get student name from the card's h3
+        const nameEl = card.querySelector('h3');
+        const name = nameEl ? nameEl.textContent.trim() : 'Student';
+        // Create a full-width cover with the name
+        const cover = document.createElement('div');
+        cover.className = 'w-full h-36 mx-auto mb-4 rounded-t-xl flex items-center justify-center text-white text-2xl font-extrabold';
+        cover.style.background = 'linear-gradient(135deg, var(--accent-color), var(--primary-color))';
+        cover.textContent = name;
+        // Find the avatar wrapper (if present) or the img itself and replace it
+        const avatarWrap = img.closest('.w-24') || img;
+        avatarWrap.replaceWith(cover);
+    });
+});
+</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDA Achievement Recognition Platform</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1D4ED8; /* Blue-700 */
+            --accent-color: #3B82F6;  /* Blue-500 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+        }
+        .text-kda-primary { color: var(--primary-color); }
+        .bg-kda-primary { background-color: var(--primary-color); }
+        .text-kda-accent { color: var(--accent-color); }
+        .btn-primary {
+            @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-lg text-white bg-kda-accent hover:bg-blue-600 transition duration-300 ease-in-out transform hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo/School Name -->
+                <div class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-kda-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.467 9.5 5.093 8.25 5.093c-2.342 0-4.25 1.908-4.25 4.25s1.908 4.25 4.25 4.25c1.25 0 2.582-.374 3.75-.984m0-13V15.75m0-10.497c1.168-.61 2.5-.984 3.75-.984 2.342 0 4.25 1.908 4.25 4.25s-1.908 4.25-4.25 4.25c-1.25 0-2.582-.374-3.75-.984" />
+                    </svg>
+                    <span class="text-2xl font-extrabold text-gray-900">KDA Achievements</span>
+                </div>
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#achievements" class="text-gray-600 hover:text-kda-accent font-medium transition">Achievements</a>
+                    <a href="#gallery" class="text-gray-600 hover:text-kda-accent font-medium transition">Gallery</a>
+                    <a href="#news" class="text-gray-600 hover:text-kda-accent font-medium transition">News & Updates</a>
+                    <a href="#admin" class="text-kda-primary font-bold hover:text-kda-accent transition border-b-2 border-transparent hover:border-kda-accent">Admin Panel</a>
+                </nav>
+                <!-- Mobile Menu Button (Conceptual for this single-file demo) -->
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-kda-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-16 bg-kda-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+                Celebrating Excellence at KDA School
+            </h1>
+            <p class="mt-4 text-xl sm:text-2xl text-blue-200 max-w-3xl mx-auto">
+                Discover the hard work, talent, and leadership of our incredible students.
+            </p>
+            <div class="mt-8">
+                <a href="#achievements" class="btn-primary">
+                    Explore Achievements
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Achievements / Student Profiles Section -->
+    <section id="achievements" class="py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+                Student Spotlight: Recent Success Stories
+            </h2>
+
+            <!-- Achievement Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="achievements">
+
+
+                <!-- Student Card 1: Academic -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden p-6 text-center border-t-4 border-kda-accent transition-all duration-300 hover:shadow-2xl">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gray-100 overflow-hidden border-4 border-kda-accent">
+                        <!-- Student Photo - Use this attribute for the source -->
+                        <img class="w-full h-full object-cover" imgsrc="https://placehold.co/96x96/60A5FA/ffffff?text=Ava" alt="Ava Chen">
+                        <!-- The actual source path should replace the placeholder URL above, e.g., src="path/to/ava.jpg" -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Ava Chen</h3>
+                    <p class="text-kda-accent font-semibold mt-1">National Math Olympiad Winner</p>
+                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">
+                        Ava secured the gold medal in the highly competitive National Math Olympiad, demonstrating exceptional problem-solving skills and dedication.
+                    </p>
+                    <a href="#" class="mt-4 block text-sm font-medium text-kda-primary hover:underline">View Profile</a>
+                </div>
+
+                <!-- Student Card 2: Arts -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden p-6 text-center border-t-4 border-kda-accent transition-all duration-300 hover:shadow-2xl">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gray-100 overflow-hidden border-4 border-kda-accent">
+                        <!-- Student Photo - Use this attribute for the source -->
+                        <img class="w-full h-full object-cover" imgsrc="https://www.google.com/imgres?q=rodrigues%20logo&imgurl=https%3A%2F%2Fcdn.dribbble.com%2Fuserupload%2F21724939%2Ffile%2Foriginal-9d2ea60a99faa5987c313691df1b3c76.png%3Fresize%3D752x%26vertical%3Dcenter&imgrefurl=https%3A%2F%2Fdribbble.com%2Fshots%2F3374194-Joe-Rodriguez-Logo&docid=ISAfln0mXOYedM&tbnid=YOZrg9tcrmp_UM&vet=12ahUKEwiJptzg8KiQAxUhWUEAHSDVA5YQM3oECBsQAA..i&w=752&h=564&hcb=2&ved=2ahUKEwiJptzg8KiQAxUhWUEAHSDVA5YQM3oECBsQAA" alt="Liam Rodriguez">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Liam Rodriguez</h3>
+                    <p class="text-kda-accent font-semibold mt-1">Young Artist of the Year</p>
+                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">
+                        Liam's stunning watercolor series was recognized at the state level, earning him the prestigious Young Artist of the Year award.
+                    </p>
+                    <a href="#" class="mt-4 block text-sm font-medium text-kda-primary hover:underline">View Profile</a>
+                </div>
+
+                <!-- Student Card 3: Sports -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden p-6 text-center border-t-4 border-kda-accent transition-all duration-300 hover:shadow-2xl">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gray-100 overflow-hidden border-4 border-kda-accent">
+                        <!-- Student Photo - Use this attribute for the source -->
+                        <img class="w-full h-full object-cover" imgsrc="https://placehold.co/96x96/10B981/ffffff?text=Sam" alt="Sam Johnson">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Sam Johnson</h3>
+                    <p class="text-kda-accent font-semibold mt-1">Regional Track & Field Champion</p>
+                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">
+                        Sam broke a long-standing school record in the 400m sprint and took home the regional championship title.
+                    </p>
+                    <a href="#" class="mt-4 block text-sm font-medium text-kda-primary hover:underline">View Profile</a>
+                </div>
+
+                <!-- Student Card 4: Leadership -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden p-6 text-center border-t-4 border-kda-accent transition-all duration-300 hover:shadow-2xl">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gray-100 overflow-hidden border-4 border-kda-accent">
+                        <!-- Student Photo - Use this attribute for the source -->
+                        <img class="w-full h-full object-cover" src="https://placehold.co/96x96/64748B/ffffff?text=David" alt="David Lee">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">David Lee</h3>
+                    <p class="text-kda-accent font-semibold mt-1">Community Service Award</p>
+                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">
+                        David organized a highly successful community cleanup drive, logging over 100 hours of volunteer leadership.
+                    </p>
+                    <a href="#" class="mt-4 block text-sm font-medium text-kda-primary hover:underline">View Profile</a>
+                </div>
+
+                <!-- Repeat this card structure for more achievements -->
+
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="btn-primary bg-gray-700 hover:bg-gray-800">
+                    See All Student Profiles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo and Video Gallery Section -->
+    <section id="gallery" class="py-16 sm:py-24 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+                Gallery: Moments of Success
+            </h2>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                Browse our collection of photos and videos capturing the excitement from competitions, award ceremonies, and school events.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.01] transition">
+                    <img class="w-full h-full object-cover" src="https://placehold.co/400x225/A5B4FC/ffffff?text=Sports+Team+Win" alt="Sports Team">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
+                        <span class="text-white font-semibold">Sports Day 2024</span>
+                    </div>
+                </div>
+                <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.01] transition">
+                    <img class="w-full h-full object-cover" src="https://placehold.co/400x225/B8C1FF/ffffff?text=Science+Fair+Award" alt="Science Fair">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
+                        <span class="text-white font-semibold">Science Fair 2024</span>
+                    </div>
+                </div>
+                <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.01] transition">
+                    <img class="w-full h-full object-cover" src="https://placehold.co/400x225/6366F1/ffffff?text=Art+Exhibition" alt="Art Exhibition">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
+                        <span class="text-white font-semibold">Arts Showcase</span>
+                    </div>
+                </div>
+                <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.01] transition">
+                    <img class="w-full h-full object-cover" src="https://placehold.co/400x225/93C5FD/ffffff?text=Leadership+Workshop" alt="Leadership Workshop">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
+                        <span class="text-white font-semibold">Leadership Event</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button class="btn-primary">
+                    View Full Gallery
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News and Updates Section -->
+    <section id="news" class="py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+                KDA News & Latest Updates
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/D1D5DB/1F2937?text=New+Curriculum" alt="Curriculum update graphic">
+                    <div class="p-6">
+                        <p class="text-sm text-kda-accent font-semibold">Academics | Sep 20, 2024</p>
+                        <h3 class="text-xl font-bold text-gray-900 mt-2 hover:text-kda-primary cursor-pointer">
+                            New STEM Curriculum Launches for Grades 9-12
+                        </h3>
+                        <p class="text-gray-600 mt-3 line-clamp-3">
+                            The KDA school board has approved a cutting-edge STEM curriculum designed to prepare students for future tech careers. Details inside.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/D1D5DB/1F2937?text=Alumni+Event" alt="Alumni event graphic">
+                    <div class="p-6">
+                        <p class="text-sm text-kda-accent font-semibold">Community | Sep 15, 2024</p>
+                        <h3 class="text-xl font-bold text-gray-900 mt-2 hover:text-kda-primary cursor-pointer">
+                            Alumni Connect: Career Mentorship Night Success
+                        </h3>
+                        <p class="text-gray-600 mt-3 line-clamp-3">
+                            Over 50 alumni returned to campus to mentor current students, sharing valuable career advice and industry insights.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/D1D5DB/1F2937?text=Upcoming+Auditions" alt="Auditions graphic">
+                    <div class="p-6">
+                        <p class="text-sm text-kda-accent font-semibold">Arts | Sep 10, 2024</p>
+                        <h3 class="text-xl font-bold text-gray-900 mt-2 hover:text-kda-primary cursor-pointer">
+                            Drama Club Auditions for Winter Production Announced
+                        </h3>
+                        <p class="text-gray-600 mt-3 line-clamp-3">
+                            Students interested in the upcoming musical are invited to sign up for auditions this week. All skill levels welcome!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel Link (Conceptual) -->
+    <section id="admin" class="py-16 bg-kda-primary/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-900">
+                Admin Access
+            </h2>
+            <p class="mt-2 text-gray-600">
+                For school administrators: Click below to log in and publish new student achievements, news updates, and manage the gallery content.
+            </p>
+            <div class="mt-6">
+                <a href="/admin-login" class="btn-primary bg-kda-primary hover:bg-blue-800">
+                    Go to Admin Login
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:justify-between md:items-center">
+            <div class="text-center md:text-left">
+                <p class="text-sm">&copy; 2024 KDA School. All Rights Reserved.</p>
+                <p class="text-xs text-gray-400 mt-1">Celebrating Student Success Since Day One.</p>
+            </div>
+            <div class="flex justify-center md:justify-end space-x-6 mt-4 md:mt-0">
+                <a href="#" class="text-gray-400 hover:text-white transition text-sm">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition text-sm">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
